@@ -3,12 +3,12 @@
 
 #include <iostream>
 #include "../Abilities/UnitState.h"
+#include "UnitExceptions.h"
 
 class UnitIsDead {};
 
 class Unit {
 private:
-    //private properties
     UnitState* unitState;
     std::string* name;
 

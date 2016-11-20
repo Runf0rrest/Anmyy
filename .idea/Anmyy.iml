@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Anmyy/Abilities/UnitState.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Anmyy/Units/Unit.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Anmyy/Units/Unit.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Anmyy/Units/UnitExceptions.h" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

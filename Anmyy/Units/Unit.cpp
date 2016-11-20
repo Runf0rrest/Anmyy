@@ -6,67 +6,60 @@ Unit::Unit(const std::string& name, int hp, int dmg, double physicalResistance, 
     this->unitState = new UnitState(hp, magicalResistance, physicalResistance, dmg);
 }
 
-Unit::~Unit() {}
+Unit::~Unit() {
+    delete this->unitState;
+    delete this->name;
+}
 
 void Unit::ensureIsAlive() {
-    if ( hitPoints == 0 ) {
+    if ( this->unitState->getHealthPoints() == 0 ) {
         throw UnitIsDead();
     }
 }
 
 int Unit::getDamage() const {
-    return damage;
+    return this->unitState->getDamage();
 }
 
 int Unit::getHitPoints() const {
-    return hitPoints;
+    return this->unitState->getHealthPoints();
 }
 
 int Unit::getHitPointsLimit() const {
-    return hitPointsLimit;
+    return this->unitState->getHealthPointsLimit();
 }
 
 const std::string& Unit::getName() const {
-    return name;
+    return *(this->name);
 }
 
 void Unit::takePhysicalDamage(int dmg) {
     ensureIsAlive();
 
-    if ( dmg >= hitPoints ) {
-        hitPoints = 0;
-
-        return;
-    }
-
-    hitPoints -= dmg;
+    unitState->takePhysicalDamage(dmg);
 }
 
 void Unit::addHitPoints(int hp) {
     ensureIsAlive();
 
-    if ( hitPoints + hp >= hitPointsLimit ) {
-        hitPoints = hitPointsLimit;
-
-        return;
-    }
-
-    hitPoints += hp;
+    this->unitState->addHealthPoints(hp);
 }
 
 void Unit::attack(Unit& enemy) {
     ensureIsAlive();
 
-    enemy.takePhysicalDamage(damage);
+    enemy.takePhysicalDamage(this->unitState->getDamage());
 
-    enemy.counterAttack(*this);
+    try {
+        enemy.counterAttack(*this);
+    } catch (UnitIsDeadException) {
+
+    }
 }
 void Unit::counterAttack(Unit& enemy) {
-    if ( this->hitPoints == 0 ) {
-        return;
-    }
+    ensureIsAlive();
 
-    enemy.takePhysicalDamage(damage / 2);
+    enemy.takePhysicalDamage(this->unitState->getDamage() / 2);
 }
 
 void Unit::takeMagicalDamage(int dmg) {

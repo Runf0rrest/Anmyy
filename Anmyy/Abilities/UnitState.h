@@ -16,11 +16,14 @@ class UnitState {
         int getHealthPoints() const;
         int getHealthPointsLimit() const;
 
+        int getDamage() const;
+
         double getMagicalResistance() const;
         double getPhysicalResistance() const;
 
         void takePhysicalDamage(int damage);
         void takeMagicalDamage(int damage);
+        void addHealthPoints(int hp);
 
 };
 

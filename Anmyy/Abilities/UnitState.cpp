@@ -46,4 +46,18 @@ double UnitState::getMagicalResistance() const {
     return this->magicalResistance;
 }
 
+int UnitState::getDamage() const {
+    return this->damage;
+}
+
+void UnitState::addHealthPoints(int hp) {
+    if ( this->healthPoints + hp >= this->healthPointsLimit ) {
+        this->healthPoints = this->healthPointsLimit;
+
+        return;
+    }
+
+    this->healthPoints += hp;
+}
+
 
