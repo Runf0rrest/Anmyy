@@ -2,7 +2,7 @@
 #define UNIT_EXCEPTIONS_H
 
 
-class UnitExceptions {};
+class UnitIsDeadException {};
 
 
 #endif //UNIT_EXCEPTIONS_H

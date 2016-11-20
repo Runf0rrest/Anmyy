@@ -53,7 +53,7 @@ void Unit::attack(Unit& enemy) {
     try {
         enemy.counterAttack(*this);
     } catch (UnitIsDeadException) {
-
+        return;
     }
 }
 void Unit::counterAttack(Unit& enemy) {
@@ -63,11 +63,9 @@ void Unit::counterAttack(Unit& enemy) {
 }
 
 void Unit::takeMagicalDamage(int dmg) {
-    if ( this->hitPoints == 0 ) {
-        return;
-    }
+    ensureIsAlive();
 
-
+    this->unitState->takeMagicalDamage(dmg);
 }
 
 std::ostream& operator<<(std::ostream& out, const Unit& unit) {
